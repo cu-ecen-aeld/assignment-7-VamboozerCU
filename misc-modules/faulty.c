@@ -69,21 +69,28 @@ int faulty_init(void)
 {
 	int result;
 
+	printk(KERN_ALERT "Hello from faulty_init\n");
+	return 0;
+
 	/*
 	 * Register your major, and accept a dynamic number
 	 */
+	/*
 	result = register_chrdev(faulty_major, "faulty", &faulty_fops);
 	printk(KERN_ALERT "From faulty: register_chrdev = %d\n", result);
 	if (result < 0)
 		return result;
 	if (faulty_major == 0)
-		faulty_major = result; /* dynamic */
+		faulty_major = result; // dynamic
 	return 0;
+	*/
 }
 
 void faulty_cleanup(void)
 {
-	unregister_chrdev(faulty_major, "faulty");
+	//unregister_chrdev(faulty_major, "faulty");
+	printk(KERN_ALERT "Hello from faulty_cleanup\n");
+	return 0;
 }
 
 module_init(faulty_init);
