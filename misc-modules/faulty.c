@@ -35,9 +35,8 @@ ssize_t faulty_read(struct file *filp, char __user *buf,
 	char stack_buf[4];
 
 	/* Let's try a buffer overflow  */
-	
-	for (i = 0; i < 20; i++)
 	//for (i = 0; i < 4; i++) // ummm... lets not.
+	for (i = 0; i < 20; i++)
 		*(stack_buf + i) = 0xff;
 	if (count > 4)
 		count = 4; // copy 4 bytes to the user
@@ -85,7 +84,7 @@ int faulty_init(void)
 void faulty_cleanup(void)
 {
 	unregister_chrdev(faulty_major, "faulty");
-	//printk(KERN_ALERT "Hello from faulty_cleanup\n");
+	printk(KERN_ALERT "Hello from faulty_cleanup\n");
 }
 
 module_init(faulty_init);
