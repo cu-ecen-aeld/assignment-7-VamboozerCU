@@ -36,10 +36,12 @@ ssize_t faulty_read(struct file *filp, char __user *buf,
 	char stack_buf[4];
 
 	/* Let's try a buffer overflow  */
-	for (i = 0; i < 20; i++)
+	// ummm... lets not.
+	//for (i = 0; i < 20; i++)
+	for (i = 0; i < 4; i++)
 		*(stack_buf + i) = 0xff;
-	if (count > 4)
-		count = 4; /* copy 4 bytes to the user */
+	//if (count > 4)
+	//	count = 4; /* copy 4 bytes to the user */
 	ret = copy_to_user(buf, stack_buf, count);
 	if (!ret)
 		return count;
@@ -50,7 +52,7 @@ ssize_t faulty_write (struct file *filp, const char __user *buf, size_t count,
 		loff_t *pos)
 {
 	/* make a simple fault by dereferencing a NULL pointer */
-	*(int *)0 = 0;
+	//*(int *)0 = 0; ummm... lets not
 	return 0;
 }
 
