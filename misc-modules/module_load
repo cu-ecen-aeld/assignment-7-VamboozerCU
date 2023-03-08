@@ -23,7 +23,7 @@ fi
 
 echo "Load our module, exit on failure"
 #modprobe $module $* || exit 1
-if modprobe $module $* ; then
+if modprobe $module ; then
     echo "Module $module loaded."
 else
     echo "Failed to load module $module."
@@ -32,6 +32,7 @@ fi
 
 echo "Get the major number (allocated with allocate_chrdev_region) from /proc/devices"
 major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
+
 echo "major = $major"
 if [ ! -z ${major} ]; then
     echo "Remove any existing /dev node for /dev/${device}"
