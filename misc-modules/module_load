@@ -4,6 +4,7 @@ module=$1
 device=$1
 # Support read/write for owner and group, read only for everyone using 644
 mode="664"
+KERNEL=`uname -r`
 
 if [ $# -ne 1 ]; then
 	echo "Wrong number of arguments"
@@ -23,7 +24,8 @@ fi
 
 echo "Load our module, exit on failure"
 #modprobe $module $* || exit 1
-if modprobe $module --first-time -n -v; then
+#if modprobe $module --first-time -n -v; then
+if insmod /lib/modules/$KERNEL/kernel/drivers/$module/$module.ko $*; then
     echo "Module $module loaded."
 else
     echo "Failed to load module $module."
