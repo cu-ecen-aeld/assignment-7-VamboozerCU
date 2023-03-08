@@ -23,7 +23,7 @@ fi
 
 echo "Load our module, exit on failure"
 #modprobe $module $* || exit 1
-if modprobe $module ; then
+if modprobe $module --first-time -n -v; then
     echo "Module $module loaded."
 else
     echo "Failed to load module $module."
