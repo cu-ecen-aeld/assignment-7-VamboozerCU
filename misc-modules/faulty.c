@@ -73,11 +73,11 @@ int faulty_init(void)
 	 * Register your major, and accept a dynamic number
 	 */
 	result = register_chrdev(faulty_major, "faulty", &faulty_fops);
+	printk(KERN_ALERT "From faulty: register_chrdev = %d\n", result);
 	if (result < 0)
 		return result;
 	if (faulty_major == 0)
 		faulty_major = result; /* dynamic */
-
 	return 0;
 }
 
