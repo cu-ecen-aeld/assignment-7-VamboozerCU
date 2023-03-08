@@ -66,7 +66,7 @@ struct file_operations faulty_fops = {
 
 int faulty_init(void)
 {
-	//int result;
+	int result;
 
 	printk(KERN_ALERT "Hello from faulty_init\n");
 	return 0;
