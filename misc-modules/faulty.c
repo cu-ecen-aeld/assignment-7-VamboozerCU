@@ -67,7 +67,7 @@ struct file_operations faulty_fops = {
 
 int faulty_init(void)
 {
-	int result;
+	//int result;
 
 	printk(KERN_ALERT "Hello from faulty_init\n");
 	return 0;
@@ -90,7 +90,6 @@ void faulty_cleanup(void)
 {
 	//unregister_chrdev(faulty_major, "faulty");
 	printk(KERN_ALERT "Hello from faulty_cleanup\n");
-	return 0;
 }
 
 module_init(faulty_init);
